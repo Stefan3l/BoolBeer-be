@@ -9,6 +9,6 @@ class Beer extends Model
     //creo il collegamento con la tabella Categorie
     public function categories()
     {
-        return $this->belongsTo(Categorie::class);
+        return $this->belongsTo(Category::class);
     }
 }
