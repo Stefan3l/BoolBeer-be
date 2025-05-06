@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Beer;
+use App\Models\Category;  // Add this import
 use Illuminate\Http\Request;
 
 class BeerController extends Controller
@@ -42,10 +43,10 @@ class BeerController extends Controller
      */
     public function show(Beer $beer)
     {   
-        //prendo i dati della birra ma anche i dati della tabella categories
-        $beer = Beer::with('category')->findOrFail($beer->id);
-        //passo la birra alla view show
-        return view('admin.beers.show', compact('beer'));
+        $beer = Beer::find($beer->id);
+        $categories = Category::all();
+        
+        return view('admin.beers.show', compact('beer', 'categories'));
     }
 
     /**
