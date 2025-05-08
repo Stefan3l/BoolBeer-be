@@ -1,5 +1,3 @@
-
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -19,12 +17,25 @@
                     </button>
                 </div>
             </div>
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mt-5"> 
-                <h1 class="text-white text-center uppercase text-xl"> lista delle birre </h1>
-                <div> 
-                    <img src="{{asset('../images/beers-list.jpg')}}" alt="beer" class="w-16 h-16 object-cover rounded-full mx-auto mt-4">
-                </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-5">
+                <a href="{{ route('admin.beers.index') }}" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg relative group">
+                    <div class="h-96 relative">
+                        <img src="{{asset('../images/beers-list.jpg')}}" alt="beer" class="w-full h-full object-cover transition-opacity group-hover:opacity-75">
+                        <h1 class="text-white text-center uppercase text-xl absolute bottom-4 left-0 right-0 bg-black bg-opacity-50 py-2">
+                            Lista delle birre
+                        </h1>
+                    </div>
+                </a>
+                <a href="{{ route('admin.beers.index') }}" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg relative group">
+                    <div class="h-96 relative">
+                        <img src="{{asset('../images/beer-add.jpg')}}" alt="beer" class="w-full h-full object-cover transition-opacity group-hover:opacity-75">
+                        <h1 class="text-white text-center uppercase text-xl absolute bottom-4 left-0 right-0 bg-black bg-opacity-50 py-2">
+                            Aggiungi una nuova birra
+                        </h1>
+                    </div>
+                </a>
             </div>
+            Carosello
         </div>
     </div>
 </x-app-layout>
