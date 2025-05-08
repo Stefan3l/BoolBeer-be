@@ -23,18 +23,13 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->prefix('admin')
-    ->group( function () {
-
-        
-        Route::get('/beers', [BeerController::class, 'index'])->name('beers.index');
-        Route::get('//beers/{beer}', [BeerController::class, 'show'])->name('beers.show');
-        Route::get('/beers/edit/{beer}', [BeerController::class, 'edit'])->name('beers.edit');
-        Route::put('/beers/{beer}', [BeerController::class, 'update'])->name('beers.update');
-        Route::delete('/beers/{beer}', [BeerController::class, 'destroy'])->name('beers.destroy');
-        
-    });
-
-   
+    ->group(function () {
     
+        Route::get('/', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
+
+        Route::resource('beers', BeerController::class);
+    });
 
 require __DIR__.'/auth.php';

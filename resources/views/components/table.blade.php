@@ -15,7 +15,7 @@
             @foreach($beers as $beer)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td class="px-6 py-4">
-                        <img src="{{asset('../images/' . $beer->image)}}" alt="{{$beer->name}}" class="w-16 h-16 object-cover rounded-full">
+                        <img src="{{asset('storage/public/images/' . $beer->image)}}" alt="{{$beer->name}}" class="w-16 h-16 object-cover rounded-full">
                     </td>
                     <td class="px-6 py-4 font-bold text-xl text-gray-900 dark:text-white whitespace-nowrap">{{$beer->name}}</td>
                     <td class="px-6 py-4">{{$beer->quantity}}cl</td>

@@ -28,7 +28,19 @@ class BeerController extends Controller
      */
     public function create()
     {
-        //
+        //recupero i datti delle birre
+        $beers = Beer::all();
+
+        //creo un nuovo oggetto per birra
+        $beer = new Beer();
+
+        //recupero le categorie dal db
+        $categories = Category::all();
+
+        //passo i dati alla view
+
+        return view('admin.beers.create', compact(['beer', 'categories', 'beers']));
+        
     }
 
     /**
@@ -36,7 +48,34 @@ class BeerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //prendo i dati dal form
+        $data = $request->all();
+
+        //creo una nuova birra
+        $beer = new Beer();
+        $beer->name = $data['name'];
+        $beer->description = $data['description'];
+        $beer->alcohol_content = $data['alcohol_content'];
+        $beer->quantity = $data['quantity'];
+        $beer->categorie_id = $data['categorie_id'];
+        
+        //se l'utente ha caricato un'immagine
+        if(array_key_exists("image", $data)) {
+            //ottengo il nome dell'immagine
+            $nameImage = $data['image']->getClientOriginalName();
+
+            // Salvo l'immagine nella cartella public/images
+            $data['image']->storeAs('public/images', $nameImage);
+
+            // Salvo solo il nome dell'immagine nel db
+            $beer->image = $nameImage;
+        }
+
+        //salvo la birra nel db
+        $beer->save();
+
+        //reindirizzo alla pagina singolo al prodotto
+        return redirect()->route('admin.beers.show', $beer);
     }
 
     /**
