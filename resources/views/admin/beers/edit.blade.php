@@ -9,12 +9,12 @@
             </div>
                <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden hover:shadow-3xl transition-shadow duration-300">
                 <div class="flex flex-col md:flex-row">
-                    <div class="w-full md:w-1/3 bg-gray-100 dark:bg-gray-700 relative">
-                        <div class="img-magnifier-container">
+                    <div class="w-full md:w-1/3 bg-gray-100 dark:bg-gray-700 relative flex items-center justify-center">
+                        <div class="img-magnifier-container w-full h-[400px] flex items-center justify-center">
                             <img id="beerImage" 
                                  src="{{asset('/storage/public/images/' . $beer->image)}}" 
                                  alt="{{$beer->name}}" 
-                                 class="w-full h-[400px] object-cover">
+                                 class="w-full h-full object-contain">
                         </div>
                     </div>
                     <div class="w-full md:w-2/3 p-8">
