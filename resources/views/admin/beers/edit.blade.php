@@ -7,12 +7,12 @@
             <div class="text-center mb-8"> 
                 <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-200">Beer Details</h1>
             </div>
-            <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden hover:shadow-3xl transition-shadow duration-300">
+               <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden hover:shadow-3xl transition-shadow duration-300">
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 bg-gray-100 dark:bg-gray-700 relative">
                         <div class="img-magnifier-container">
                             <img id="beerImage" 
-                                 src="{{asset('../images/' . $beer->image)}}" 
+                                 src="{{asset('/storage/public/images/' . $beer->image)}}" 
                                  alt="{{$beer->name}}" 
                                  class="w-full h-[400px] object-cover">
                         </div>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <h1 class="text-center font-bold text-white my-8 text-2xl">Modifica il tuo prodotto</h1>
+                 <h1 class="text-center font-bold text-white my-8 text-2xl">Modifica il tuo prodotto</h1>
             <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden hover:shadow-3xl transition-shadow duration-300 p-8"> 
                 <form action="{{ route('admin.beers.update', $beer->id)}}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf 

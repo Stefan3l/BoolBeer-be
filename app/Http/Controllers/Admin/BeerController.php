@@ -96,7 +96,7 @@ class BeerController extends Controller
 
 
         }
-        
+       
         //salvo le modifiche nel db
         $beer->update();
 

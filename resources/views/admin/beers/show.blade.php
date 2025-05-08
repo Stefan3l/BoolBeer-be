@@ -12,7 +12,7 @@
                     <div class="w-full md:w-1/3 bg-gray-100 dark:bg-gray-700 relative">
                         <div class="img-magnifier-container">
                             <img id="beerImage" 
-                                 src="{{asset('../images/' . $beer->image)}}" 
+                                 src="{{asset('storage/public/images/' . $beer->image)}}" 
                                  alt="{{$beer->name}}" 
                                  class="w-full h-[400px] object-cover">
                         </div>
