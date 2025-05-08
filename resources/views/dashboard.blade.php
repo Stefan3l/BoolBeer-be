@@ -19,8 +19,11 @@
                     </button>
                 </div>
             </div>
-            <div> 
-                <h1> lista delle birre </h1>
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mt-5"> 
+                <h1 class="text-white text-center uppercase text-xl"> lista delle birre </h1>
+                <div> 
+                    <img src="{{asset('../images/beers-list.jpg')}}" alt="beer" class="w-16 h-16 object-cover rounded-full mx-auto mt-4">
+                </div>
             </div>
         </div>
     </div>

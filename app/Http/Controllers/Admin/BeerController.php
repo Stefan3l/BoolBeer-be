@@ -101,7 +101,7 @@ class BeerController extends Controller
         $beer->update();
 
         //reindirizzo alla pagina singolo al prodotto
-        return redirect()->route('admin.beers.show', $beer)->with('message', 'La birra è stata aggiornata con successo');
+        return redirect()->route('admin.beers.show', $beer);
 
         
     }
@@ -109,8 +109,14 @@ class BeerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Beer $beer)
     {
-        //
+       
+       
+        //elimino il prodotto dal db
+        $beer->delete();
+
+        //faccio il redirect alla pagina principale
+        return redirect()->route('admin.beers.index');
     }
 }

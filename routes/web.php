@@ -30,6 +30,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('//beers/{beer}', [BeerController::class, 'show'])->name('beers.show');
         Route::get('/beers/edit/{beer}', [BeerController::class, 'edit'])->name('beers.edit');
         Route::put('/beers/{beer}', [BeerController::class, 'update'])->name('beers.update');
+        Route::delete('/beers/{beer}', [BeerController::class, 'destroy'])->name('beers.destroy');
         
     });
 

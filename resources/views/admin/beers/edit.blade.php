@@ -7,6 +7,16 @@
             <div class="text-center mb-8"> 
                 <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-200">Beer Details</h1>
             </div>
+            <div class="my-5">
+                <button class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition duration-300 flex items-center" >
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    <a href="{{ route('admin.beers.index') }}" >
+                        Torna alla pagina principale
+                    </a>
+                </button>
+            </div>
                <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden hover:shadow-3xl transition-shadow duration-300">
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 bg-gray-100 dark:bg-gray-700 relative flex items-center justify-center">
@@ -63,11 +73,41 @@
                             </div>
                         </div>
                         <div class="mt-8 flex space-x-4">
-                            <button class="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-semibold py-2 px-4 rounded ">
-                                <a href="{{ route('admin.beers.edit', $beer) }}" >                             
-                                    Cancella
-                                </a>
+                            <button type="button" 
+                                    class="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-semibold py-2 px-4 rounded"
+                                    onclick="document.getElementById('deleteModal').classList.remove('hidden')">
+                                Elimina
                             </button>
+                        </div>
+
+
+                        <!-- Delete Modal -->
+                        <div id="deleteModal" class=" fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex items-center justify-center hidden">
+                            <div class="relative p-5 border w-96 shadow-lg rounded-md bg-white dark:bg-gray-800">
+                                <div class="mt-3 text-center">
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-200">Conferma eliminazione</h3>
+                                    <div class="mt-2 px-7 py-3">
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                                            Sei sicuro di voler eliminare questa birra? Questa azione non può essere annullata.
+                                        </p>
+                                    </div>
+                                    <div class="flex justify-center gap-4 mt-4">
+                                        <button type="button" 
+                                                class="border border-gray-400 text-gray-600 hover:bg-gray-100 px-4 py-2 rounded"
+                                                onclick="document.getElementById('deleteModal').classList.add('hidden')">
+                                            Annulla
+                                        </button>
+                                        <form action="{{ route('admin.beers.destroy', $beer) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method("DELETE")
+                                            <button type="submit" 
+                                                    class="bg-red-500 text-white hover:bg-red-600 px-4 py-2 rounded">
+                                                Conferma eliminazione
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
