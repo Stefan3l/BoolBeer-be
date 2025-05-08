@@ -21,7 +21,9 @@
                     <td class="px-6 py-4">{{$beer->quantity}}cl</td>
                     <td class="px-6 py-4">{{number_format($beer->alcohol_content / 10, 1)}}%</td>
                     <td>
-                        <a href="{{ route('admin.beers.show', $beer->id) }}" class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-700">View</a>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <a href="{{ route('admin.beers.show', $beer->id) }}" >View</a>
+                        </button>
                 </tr>
             @endforeach
         </tbody>

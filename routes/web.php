@@ -28,6 +28,12 @@ Route::middleware(['auth', 'verified'])
         
         Route::get('/beers', [BeerController::class, 'index'])->name('beers.index');
         Route::get('//beers/{beer}', [BeerController::class, 'show'])->name('beers.show');
+        Route::get('/beers/edit/{beer}', [BeerController::class, 'edit'])->name('beers.edit');
+        Route::put('/beers/{beer}', [BeerController::class, 'update'])->name('beers.update');
+        
     });
+
+   
+    
 
 require __DIR__.'/auth.php';

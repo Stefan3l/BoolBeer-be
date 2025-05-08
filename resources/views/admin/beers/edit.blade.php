@@ -63,89 +63,74 @@
                             </div>
                         </div>
                         <div class="mt-8 flex space-x-4">
-                            <button class="border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white font-semibold py-2 px-4 rounded ">
+                            <button class="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-semibold py-2 px-4 rounded ">
                                 <a href="{{ route('admin.beers.edit', $beer) }}" >                             
-                                    Modifica
+                                    Cancella
                                 </a>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+            <h1 class="text-center font-bold text-white my-8 text-2xl">Modifica il tuo prodotto</h1>
+            <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden hover:shadow-3xl transition-shadow duration-300 p-8"> 
+                <form action="{{ route('admin.beers.update', $beer->id)}}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                    @csrf 
+                    @method('PUT')
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-gray-700 dark:text-gray-200 font-bold mb-2">Nome della birra</label>
+                                <input type="text" name="name" id="name" value="{{ $beer->name }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" >
+                            </div>
+                            <div>
+                                <label for="quantity" class="block text-gray-700 dark:text-gray-200 font-bold mb-2">Quantity (ml)</label>
+                                <input type="number" name="quantity" id="quantity" value="{{ $beer->quantity }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" >
+                            </div>
+                            <div>
+                                <label for="alcohol_content" class="block text-gray-700 dark:text-gray-200 font-bold mb-2">Alcohol Content (%)</label>
+                                <input type="number" step="0.1" name="alcohol_content" id="alcohol_content" value="{{ $beer->alcohol_content }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" >
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label for="image" class="block text-gray-700 dark:text-gray-200 font-bold mb-2">Immagine della birra</label>
+                                <input type="file" name="image" id="image"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline cursor-pointer dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" >
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Immagine attuale: {{ $beer->image }}</p>
+                            </div>
+                            
+                            <div>
+                                <label for="categorie_id" class="block text-gray-700 dark:text-gray-200 font-bold mb-2">Categoria</label>
+                                <select name="categorie_id" id="categorie_id" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}" {{ $beer->categorie_id == $category->id ? 'selected' : '' }}>
+                                            {{ $category->type_name }} - {{ $category->type_color }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <label for="description" class="block text-gray-700 dark:text-gray-200 font-bold mb-2">Description</label>
+                        <textarea name="description" id="description" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">{{ $beer->description }}</textarea>
+                    </div>
+
+                    <div class="flex justify-end space-x-4 mt-8"> 
+                        <a href="{{ route('admin.beers.index') }}" class="border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white font-semibold py-2 px-6 rounded transition-colors duration-200">
+                            Annulla
+                        </a>
+                        <button type="submit" class="border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white font-semibold py-2 px-6 rounded transition-colors duration-200">
+                            Salva Modifiche
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
-    <style>
-        .img-magnifier-container {
-            position: relative;
-        }
-        .img-magnifier-glass {
-            position: absolute;
-            border: 3px solid #000;
-            border-radius: 50%;
-            cursor: none;
-            width: 100px;
-            height: 100px;
-            display: none;
-        }
-    </style>
 
-    <script>
-        function magnify(imgID, zoom) {
-            var img, glass, w, h, bw;
-            img = document.getElementById(imgID);
-            
-            glass = document.createElement("DIV");
-            glass.setAttribute("class", "img-magnifier-glass");
-            img.parentElement.insertBefore(glass, img);
-
-            glass.style.backgroundImage = "url('" + img.src + "')";
-            glass.style.backgroundRepeat = "no-repeat";
-            glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
-            bw = 3;
-            w = glass.offsetWidth / 2;
-            h = glass.offsetHeight / 2;
-
-            img.addEventListener("mousemove", moveMagnifier);
-            glass.addEventListener("mousemove", moveMagnifier);
-            
-            img.addEventListener("mouseenter", function() {
-                glass.style.display = "block";
-            });
-            
-            img.addEventListener("mouseleave", function() {
-                glass.style.display = "none";
-            });
-
-            function moveMagnifier(e) {
-                var pos, x, y;
-                e.preventDefault();
-                pos = getCursorPos(e);
-                x = pos.x;
-                y = pos.y;
-
-                if (x > img.width - (w / zoom)) {x = img.width - (w / zoom);}
-                if (x < w / zoom) {x = w / zoom;}
-                if (y > img.height - (h / zoom)) {y = img.height - (h / zoom);}
-                if (y < h / zoom) {y = h / zoom;}
-
-                glass.style.left = (x - w) + "px";
-                glass.style.top = (y - h) + "px";
-                glass.style.backgroundPosition = "-" + ((x * zoom) - w) + "px -" + ((y * zoom) - h) + "px";
-            }
-
-            function getCursorPos(e) {
-                var a, x = 0, y = 0;
-                e = e || window.event;
-                a = img.getBoundingClientRect();
-                x = e.pageX - a.left - window.pageXOffset;
-                y = e.pageY - a.top - window.pageYOffset;
-                return {x : x, y : y};
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            magnify("beerImage", 3);
-        });
-    </script>
 </x-app-layout>
