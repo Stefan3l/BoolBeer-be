@@ -13,13 +13,17 @@ class BeerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // recupero tutte le birre dal db
-        $beers = Beer::all();
+        $query = Beer::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'LIKE', "%{$search}%");
+        }
+
+        $beers = $query->orderBy('created_at', 'desc')->get();  // Changed from paginate() to get()
         
-        // dd($beers);
-        // passo le birre alla view dashboard
         return view('admin.beers.index', compact('beers'));
     }
 
