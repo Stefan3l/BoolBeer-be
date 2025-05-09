@@ -1,4 +1,6 @@
 <x-app-layout>
+    {{-- Aggiungi questi link nel head --}}
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <x-slot name="header">
     </x-slot>
 
@@ -17,7 +19,7 @@
                     </a>
                 </button>
             </div>
-               <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden hover:shadow-3xl transition-shadow duration-300">
+               <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden hover:shadow-3xl transition-shadow duration-300 opacity-0" data-aos="fade" data-aos-duration="1500" data-aos-delay="200">
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 bg-gray-100 dark:bg-gray-700 relative flex items-center justify-center">
                         <div class="img-magnifier-container w-full h-[400px] flex items-center justify-center">
@@ -113,7 +115,7 @@
                 </div>
             </div>
                  <h1 class="text-center font-bold text-white my-8 text-2xl">Modifica il tuo prodotto</h1>
-            <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden hover:shadow-3xl transition-shadow duration-300 p-8"> 
+            <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden hover:shadow-3xl transition-shadow duration-300 p-8 opacity-0" data-aos="fade" data-aos-duration="1500" data-aos-delay="500"> 
                 <form action="{{ route('admin.beers.update', $beer->id)}}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf 
                     @method('PUT')
@@ -172,5 +174,9 @@
         </div>
     </div>
 
-
+    {{-- Aggiungi questo script prima della chiusura di </x-app-layout> --}}
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </x-app-layout>

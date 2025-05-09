@@ -17,7 +17,7 @@
                     </a>
                 </button>
             </div>
-            <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden hover:shadow-3xl transition-shadow duration-300">
+            <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden hover:shadow-3xl transition-shadow duration-300 animate-slide-up opacity-0">
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 bg-gray-100 dark:bg-gray-700 relative flex items-center justify-center">
                         <div class="img-magnifier-container w-full h-[400px] flex items-center justify-center">
@@ -131,6 +131,21 @@
             width: 100px;
             height: 100px;
             display: none;
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out forwards;
         }
     </style>
 

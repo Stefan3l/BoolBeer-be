@@ -1,6 +1,6 @@
 @props(['beers'])
 
-<div class="overflow-x-auto shadow-md sm:rounded-lg">
+<div class="overflow-x-auto shadow-md sm:rounded-lg scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-600 dark:scrollbar-track-gray-800">
     <table class="w-full text-sm text-left text-gray-800 dark:text-gray-200">
         <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
             <tr>
