@@ -25,9 +25,16 @@
                 <div class="py-6 text-white text-center"> 
                     <h1 class="font-bold text-2xl"> Lista delle birre </h1>
                 </div>
-                <div id="table-section" class="overflow-x-auto h-[calc(100vh-300px)] overflow-y-auto">
-                    <x-table :beers="$beers"></x-table>
-                </div>
+                @if($beers->isEmpty() && request('search'))
+                    <div class="flex flex-col items-center justify-center p-8">
+                        <img src="{{ asset('images/non-disponibile.jpg') }}" alt="No results found" class="w-64 mb-4 rounded-md shadow-xl">
+                        <p class="text-xl text-gray-200">Nessun risultato trovato per "{{ request('search') }}"</p>
+                    </div>
+                @else
+                    <div id="table-section" class="overflow-x-auto h-[calc(100vh-300px)] overflow-y-auto">
+                        <x-table :beers="$beers"></x-table>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
