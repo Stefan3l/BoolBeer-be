@@ -10,7 +10,12 @@ class BeerController extends Controller
 {
     public function index() {
         // prendo i dati dal database
-        $beers = Beer::all();
+        $beers = Beer::all()->map(function($beer) {
+            return [
+                ...$beer->toArray(),
+                'image_url' => asset('storage/public/images' . $beer->image)
+            ];
+        });
         
         return response()->json([
             'succes'=> true,
@@ -24,9 +29,15 @@ class BeerController extends Controller
 
         $beer->load('category');
 
+        //aggiungo l'url dell'immagine
+        $beerData = [
+            ...$beer->toArray(),
+            'image_url' => asset('storage/public/images/' . $beer->image)
+        ];
+
         return response()->json([
             'succes'=>true,
-            'data'=> $beer,
+            'data'=> $beerData,
         ]);
     }
    
