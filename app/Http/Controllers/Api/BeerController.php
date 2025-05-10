@@ -13,7 +13,7 @@ class BeerController extends Controller
         $beers = Beer::all()->map(function($beer) {
             return [
                 ...$beer->toArray(),
-                'image_url' => asset('storage/public/images' . $beer->image)
+                'image_url' => asset('storage/public/images/' . $beer->image)
             ];
         });
         
